@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ìºà Colorful Todo App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Header -->
+        <header class="app-header">
+            <h1><i class="fas fa-palette"></i> Colorful Todo App</h1>
+            <p class="subtitle">Organize your life with colorful todos! Ìæ®</p>
+        </header>
+
+        <!-- Stats Dashboard -->
+        <div class="stats-dashboard">
+            <div class="stat-card stat-total">
+                <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="stat-info">
+                    <h3>Total Tasks</h3>
+                    <p class="stat-number" id="total-tasks">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-pending">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <div class="stat-info">
+                    <h3>Pending</h3>
+                    <p class="stat-number" id="pending-tasks">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-completed">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <h3>Completed</h3>
+                    <p class="stat-number" id="completed-tasks">0</p>
+                </div>
+            </div>
+            
+            <div class="stat-card stat-high">
+                <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                <div class="stat-info">
+                    <h3>High Priority</h3>
+                    <p class="stat-number" id="high-priority">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Todo Form -->
+        <div class="add-todo-container">
+            <div class="form-card">
+                <h2><i class="fas fa-plus-circle"></i> Add New Todo</h2>
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        id="todo-input"
+                        placeholder="What needs to be done?"
+                        class="todo-input"
+                    />
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-tag"></i> Category</label>
+                        <select id="category-select" class="category-select">
+                            <option value="work" style="color: #3498db;">Work</option>
+                            <option value="personal" style="color: #9b59b6;">Personal</option>
+                            <option value="shopping" style="color: #2ecc71;">Shopping</option>
+                            <option value="urgent" style="color: #e74c3c;">Urgent</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-circle"></i> Priority</label>
+                        <select id="priority-select" class="priority-select">
+                            <option value="low" style="color: #3498db;">Low</option>
+                            <option value="medium" style="color: #f39c12;">Medium</option>
+                            <option value="high" style="color: #e74c3c;">High</option>
+                        </select>
+                    </div>
+                    
+                    <button id="add-btn" class="add-btn">
+                        <span class="btn-icon"><i class="fas fa-plus"></i></span>
+                        Add Todo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <h2><i class="fas fa-filter"></i> Filter by Category</h2>
+            <div class="category-buttons">
+                <button class="category-btn work-btn" data-category="work">
+                    <i class="fas fa-briefcase"></i> Work (<span id="work-count">0</span>)
+                </button>
+                <button class="category-btn personal-btn" data-category="personal">
+                    <i class="fas fa-user"></i> Personal (<span id="personal-count">0</span>)
+                </button>
+                <button class="category-btn shopping-btn" data-category="shopping">
+                    <i class="fas fa-shopping-cart"></i> Shopping (<span id="shopping-count">0</span>)
+                </button>
+                <button class="category-btn urgent-btn" data-category="urgent">
+                    <i class="fas fa-exclamation-triangle"></i> Urgent (<span id="urgent-count">0</span>)
+                </button>
+                <button class="category-btn all-btn active" data-category="all">
+                    <i class="fas fa-list"></i> All Todos (<span id="all-count">0</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- Todo List -->
+        <div class="todo-list-container">
+            <div class="list-header">
+                <h2><i class="fas fa-tasks"></i> Your Todos 
+                    <span id="filter-indicator" class="filter-indicator"></span>
+                </h2>
+                <div class="list-actions">
+                    <button id="clear-btn" class="clear-btn">
+                        <i class="fas fa-trash"></i> Clear Completed
+                    </button>
+                    <span class="todo-count"><span id="items-left">0</span> items left</span>
+                </div>
+            </div>
+            
+            <div id="empty-state" class="empty-state">
+                <div class="empty-icon"><i class="fas fa-party-horn"></i></div>
+                <h3>No todos yet!</h3>
+                <p>Add your first todo above to get started.</p>
+            </div>
+
+            <div id="todo-list" class="todo-list">
+                <!-- Todos will be added here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p><i class="fas fa-palette"></i> Colorful Todo App ‚Ä¢ Made with ‚ù§Ô∏è ‚Ä¢ 
+                <span class="progress-text">
+                    <span id="progress-percent">0</span>% complete
+                </span>
+            </p>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <p class="footer-note">
+                <i class="fas fa-lightbulb"></i> Tip: Click on a todo to mark it as complete!
+            </p>
+        </footer>
+    </div>
+
+    <!-- Confetti Celebration Modal -->
+    <div id="celebration-modal" class="celebration-modal">
+        <div class="celebration-content">
+            <div class="celebration-icon">Ìæâ</div>
+            <h2>Congratulations!</h2>
+            <p>You've completed all your tasks!</p>
+            <button id="close-celebration" class="celebration-btn">Keep Going!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
